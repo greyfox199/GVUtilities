@@ -172,6 +172,8 @@ function Send-GVMailMessage {
         }
     }
 
+    $Body = $Body.Replace("\", "\\")
+
     $message = "{
         ""message"": {
             ""subject"": ""$($Subject)"",
