@@ -43,6 +43,20 @@ function Out-GVLogFile {
         [Parameter()]
         [bool]$DisplayInConsole=$true
     )
+
+    if ($LogType.toLower() -eq "info") {
+        $LogString = "$(get-date) Info: $($LogString)"
+    }
+    if ($LogType.toLower() -eq "warning") {
+        $LogString = "$(get-date) Warning: $($LogString)"
+    }
+    if ($LogType.toLower() -eq "error") {
+        $LogString = "$(get-date) Error: $($LogString)"
+    }
+    if ($LogType.toLower() -eq "debug") {
+        $LogString = "$(get-date) Debug: $($LogString)"
+    }
+
     if ($DisplayInConsole -eq $true) {
         if ($LogType.toLower() -eq "info") {
             write-host $LogString
@@ -58,6 +72,7 @@ function Out-GVLogFile {
         }
     }
     if ($WriteToLog -eq $true) {
+
         $LogFileObject.writeline($LogString)
         $LogFileObject.flush()
     }
